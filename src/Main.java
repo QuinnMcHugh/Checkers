@@ -47,14 +47,18 @@ public class Main {
 		}
 		
 		Move move = new Move();
-		move.turnColor = Move.RED;
-		move.startPoint = new Point(3, 2);
+		move.turnColor = Move.BLACK;
+		move.startPoint = new Point(2, 1);
 		ArrayList<Point> jumps = new ArrayList<Point>();
-		jumps.add(new Point(1, 4));
+		jumps.add(new Point(4, 3));
 		move.jumps = jumps;
 		
 		System.out.println(game.processMove(move));
 		
 		System.out.println(game.getBoard().toString());
+		
+		GameUI ui = new GameUI();
+		ui.game = game;
+		ui.printGameState();
 	}
 }

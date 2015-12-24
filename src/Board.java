@@ -71,20 +71,42 @@ public class Board {
 		return copy;
 	}
 	
-	public String toString(){
-		String str = "+-------------------------------+\n";
+	public String[] toStringLines(){
+		String[] lines = new String[17];
 		
+		int index = 0;
+		lines[index] = "+-------------------------------+\n";
+		index++;
+
 		for (int i = 0; i < ROWS; i++){
+			String str = "";
 			for (int j = 0; j < COLUMNS; j++){
 				str += "| " + getMoniker(matrix[i][j]) + " ";
 			}
-			str += "|";
+			str += "|\n";
+			
+			lines[index] = str;
+			index++;
+			
 			if (i != ROWS - 1){
-				str += "\n|---|---|---|---|---|---|---|---|\n";
+				str = "|---|---|---|---|---|---|---|---|\n";
+				lines[index] = str;
+				index++;
 			}
 		}
 		
-		str += "\n+-------------------------------+\n";
+		lines[16] = "+-------------------------------+\n";
+
+		return lines;
+	}
+	
+	public String toString(){
+		String str = "";
+		
+		String[] lines = toStringLines();
+		for (int i = 0; i < lines.length; i++){
+			str += lines[i];
+		}
 		
 		return str;
 	}

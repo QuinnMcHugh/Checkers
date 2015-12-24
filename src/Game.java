@@ -5,11 +5,14 @@ import java.awt.*;
  */
 public class Game {
 	private Board board;
+	private char turn;
 	
 	public Board getBoard(){ return board; }
+	public char getTurn(){ return turn; }
 	
 	public Game(){
 		board = new Board();
+		turn = Move.RED;
 	}
 	
 	public boolean isGameOver(){
@@ -28,6 +31,15 @@ public class Game {
 			}
 		}
 		return (redCount == 0) || (blackCount == 0);
+	}
+	
+	private void changeTurn(){
+		if (turn == Move.RED){
+			turn = Move.BLACK;
+		}
+		else {
+			turn = Move.RED;
+		}
 	}
 	
 	public boolean processMove(Move move){
