@@ -53,6 +53,24 @@ public class Board {
 		}
 	}
 	
+	public void setMatrix(int[][] values){
+		for (int row = 0; row < ROWS; row++){
+			for (int col = 0; col < COLUMNS; col++){
+				matrix[row][col] = values[row][col];
+			}
+		}
+	}
+	
+	public int[][] getMatrixCopy(){
+		int[][] copy = new int[ROWS][COLUMNS];
+		for (int row = 0; row < ROWS; row++){
+			for (int col = 0; col < COLUMNS; col++){
+				copy[row][col] = matrix[row][col];
+			}
+		}
+		return copy;
+	}
+	
 	public String toString(){
 		String str = "+-------------------------------+\n";
 		

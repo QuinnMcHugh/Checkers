@@ -1,4 +1,6 @@
+import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -7,7 +9,7 @@ import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
-		Board board = new Board();
+		Game game = new Game();
 		
 		Scanner s = new Scanner(new File("src/input.txt"));
 		
@@ -25,27 +27,34 @@ public class Main {
 			for (int i = 2; i < line.length(); i += 4){
 				char piece = line.charAt(i);
 				if (piece == ' '){
-					board.matrix[row][col] = Board.EMPTY;
+					game.getBoard().matrix[row][col] = Board.EMPTY;
 				}
 				else if (piece == 'B'){
-					board.matrix[row][col] = Board.BLACK_KING;
+					game.getBoard().matrix[row][col] = Board.BLACK_KING;
 				}
 				else if (piece == 'b'){
-					board.matrix[row][col] = Board.BLACK_SOLDIER;
+					game.getBoard().matrix[row][col] = Board.BLACK_SOLDIER;
 				}
 				else if (piece == 'R'){
-					board.matrix[row][col] = Board.RED_KING;
+					game.getBoard().matrix[row][col] = Board.RED_KING;
 				}
 				else if (piece == 'r'){
-					board.matrix[row][col] = Board.RED_SOLDIER;
+					game.getBoard().matrix[row][col] = Board.RED_SOLDIER;
 				}
 				col++;
 			}
 			row++;
 		}
 		
-		Game game = new Game();
+		Move move = new Move();
+		move.turnColor = Move.RED;
+		move.startPoint = new Point(3, 2);
+		ArrayList<Point> jumps = new ArrayList<Point>();
+		jumps.add(new Point(1, 4));
+		move.jumps = jumps;
 		
-		System.out.println(board.toString());
+		System.out.println(game.processMove(move));
+		
+		System.out.println(game.getBoard().toString());
 	}
 }

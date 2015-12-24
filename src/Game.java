@@ -6,6 +6,8 @@ import java.awt.*;
 public class Game {
 	private Board board;
 	
+	public Board getBoard(){ return board; }
+	
 	public Game(){
 		board = new Board();
 	}
@@ -28,7 +30,18 @@ public class Game {
 		return (redCount == 0) || (blackCount == 0);
 	}
 	
-	public boolean moveIsValid(Move move){
+	public boolean processMove(Move move){
+		int[][] matrixCopy = board.getMatrixCopy();
+		if (makeMove(move)){
+			return true;
+		}
+		else {
+			board.setMatrix(matrixCopy);
+			return false;
+		}
+	}
+	
+	private boolean makeMove(Move move){
 		/* If every previous jump has executed successfully, return true. */
 		if (move.jumps.size() == 0){
 			return true;
@@ -110,7 +123,7 @@ public class Game {
 				* (only allowed by Kings),	 and a negative one would indicate 
 				* forward movement. */
 
-				if (deltaY < 0){
+				if (deltaY > 0){
 					if (board.matrix[move.startPoint.y][move.startPoint.x] != Board.RED_KING){
 						return false;
 					}
@@ -120,7 +133,7 @@ public class Game {
 			/* Now must handle all legitimate single movements which can be made */
 			
 			/* If no jump is being made, just an advancement of a piece */
-			if (deltaX == 1){
+			if (Math.abs(deltaX) == 1){
 				/* Move the piece one square */
 				board.matrix[nextPoint.y][nextPoint.x] = board.matrix[move.startPoint.y][move.startPoint.x];
 				board.matrix[move.startPoint.y][move.startPoint.x] = Board.EMPTY;
@@ -135,7 +148,7 @@ public class Game {
 			move.startPoint = nextPoint;
 			move.jumps.remove(0);
 			
-			return moveIsValid(move);
+			return makeMove(move);
 		}
 	}
 	
@@ -175,6 +188,4 @@ public class Game {
 		
 		return true;
 	}
-	
-	// public void makeMove
 }
