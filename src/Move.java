@@ -6,8 +6,8 @@ import java.util.ArrayList;
  */
 
 public class Move {
-	public static char RED = 'r';
-	public static char BLACK = 'b';
+	public static final char RED = 'r';
+	public static final char BLACK = 'b';
 	
 	/* Either 'r' or 'b' for Red or Black turn */
 	public char turnColor;

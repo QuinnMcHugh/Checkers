@@ -1,10 +1,13 @@
+import java.awt.*;
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Created by quinn on 12/24/15.
  */
 public class GameUI {
 	Game game;
+	private Point selectedPoint;
 	
 	public GameUI(){
 		game = new Game();
@@ -60,5 +63,25 @@ public class GameUI {
 			"-----------------\n" +
 			">");
 		
+	}
+	
+	public Move getPlayerMove(){
+		Scanner s = new Scanner(System.in);
+		String line = s.nextLine();
+		
+		s = new Scanner(line);
+		String command = s.next().toUpperCase();
+		
+		Move move = new Move();
+		if (command.equals("SELECT")){
+			move.turnColor = game.getTurn();
+		}
+		else if (command.equals("MOVE")){
+			
+		}
+		else if (command.equals("JUMP")){
+			
+		}
+		return move;
 	}
 }

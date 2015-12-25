@@ -11,8 +11,8 @@ public class Board {
 	public static final int RED_KING = 3;
 	public static final int BLACK_KING = 4;
 	
-	public static int ROWS = 8;
-	public static int COLUMNS = 8;
+	public static final int ROWS = 8;
+	public static final int COLUMNS = 8;
 	
 	private String getMoniker(int num){
 		if (num == EMPTY){
