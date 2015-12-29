@@ -46,19 +46,12 @@ public class Main {
 			row++;
 		}
 		
-		Move move = new Move();
-		move.turnColor = Move.BLACK;
-		move.startPoint = new Point(2, 1);
-		ArrayList<Point> jumps = new ArrayList<Point>();
-		jumps.add(new Point(4, 3));
-		move.jumps = jumps;
-		
-		System.out.println(game.processMove(move));
-		
-		System.out.println(game.getBoard().toString());
-		
 		GameUI ui = new GameUI();
 		ui.game = game;
 		ui.printGameState();
+		
+		// System.out.print("Enter a command: ");
+		Move move = ui.getPlayerMove();
+		System.out.println(move.toString());
 	}
 }

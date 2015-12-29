@@ -17,4 +17,7 @@ public class Move {
 	/* Where the piece is being jumped to during the turn */
 	public ArrayList<Point> jumps;
 	
+	public String toString(){
+		return "(Turn: " + turnColor + "), (StartPoint: " + startPoint.toString() + "), (Jumps: " + jumps.toString() + ")";
+	}
 }
