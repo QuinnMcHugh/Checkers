@@ -33,7 +33,7 @@ public class Game {
 		return (redCount == 0) || (blackCount == 0);
 	}
 	
-	private void changeTurn(){
+	public void changeTurn(){
 		if (turn == Move.RED){
 			turn = Move.BLACK;
 		}
@@ -149,6 +149,17 @@ public class Game {
 				/* Move the piece one square */
 				board.matrix[nextPoint.y][nextPoint.x] = board.matrix[move.startPoint.y][move.startPoint.x];
 				board.matrix[move.startPoint.y][move.startPoint.x] = Board.EMPTY;
+				
+				if (move.turnColor == Move.BLACK){
+					if (nextPoint.y == 7){
+						board.matrix[nextPoint.y][nextPoint.x] = Board.BLACK_KING;
+					}
+				}
+				else if (move.turnColor == Move.RED){
+					if (nextPoint.y == 0){
+						board.matrix[nextPoint.y][nextPoint.x] = Board.RED_KING;
+					}
+				}
 			}
 			else {
 				/* A jump is being made */
@@ -165,7 +176,7 @@ public class Game {
 	}
 	
 	/* This method will simulate the jump being requested by removing captured pieces */
-	public boolean processJump(Point startPoint, Point endPoint, char turnColor){
+	private boolean processJump(Point startPoint, Point endPoint, char turnColor){
 		Point capturedPoint = new Point((endPoint.x + startPoint.x) / 2, (endPoint.y + startPoint.y) / 2);
 		
 		/* The color of the captured piece must be of enemy color */

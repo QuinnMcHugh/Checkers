@@ -71,7 +71,7 @@ public class Board {
 		return copy;
 	}
 	
-	public String[] toStringLines(){
+	public String[] toStringLines(){		
 		String[] lines = new String[17];
 		
 		int index = 0;

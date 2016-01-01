@@ -17,6 +17,10 @@ public class Move {
 	/* Where the piece is being jumped to during the turn */
 	public ArrayList<Point> jumps;
 	
+	public boolean isComplete(){
+		return (startPoint != null) && (jumps != null) && (!jumps.isEmpty());
+	}
+	
 	public String toString(){
 		return "(Turn: " + turnColor + "), (StartPoint: " + startPoint.toString() + "), (Jumps: " + jumps.toString() + ")";
 	}

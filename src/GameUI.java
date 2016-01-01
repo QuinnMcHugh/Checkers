@@ -7,12 +7,10 @@ import java.util.Scanner;
  * Created by quinn on 12/24/15.
  */
 public class GameUI {
-	Game game;
+	private Game game;
 	private Point selectedPoint;
 	
-	public GameUI(){
-		game = new Game();
-	}
+	public void setGame(Game game){ this.game = game; }
 	
 	public void printGameState(){
 		/* Clears Screen */
@@ -66,12 +64,7 @@ public class GameUI {
 		
 	}
 	
-	public String getUserInput(){
-		Scanner s = new Scanner(System.in);
-		return s.nextLine();
-	}
-	
-	public boolean inputSyntaxIsValid(String line){
+	private boolean inputSyntaxIsValid(String line){
 		Scanner s = new Scanner(line);
 		String command = s.next().toUpperCase();
 		
@@ -167,7 +160,11 @@ public class GameUI {
 		return true;
 	}
 	
-	public Move getPlayerMove(){
+	public Move getPlayerMove(boolean firstCall){
+		if (!firstCall){
+			System.out.print(">");
+		}
+		
 		Scanner s = new Scanner(System.in);
 		String line = s.nextLine();
 		
@@ -194,9 +191,9 @@ public class GameUI {
 				index = line.indexOf(')') + 1;
 
 				selectedPoint = new Point(x, y);
-				move = getPlayerMove();
+				move = getPlayerMove(false);
 			}
-			else if (command.equals("MOVE")){
+			else if (command.equals("MOVE") && selectedPoint != null){
 				int endCommandIndex = line.toUpperCase().indexOf("MOVE") + "MOVE".length();
 				line = line.substring(endCommandIndex);
 				
@@ -217,8 +214,12 @@ public class GameUI {
 				
 				move.startPoint = selectedPoint;
 				move.jumps = jumps;
+				
+				if (Math.abs(move.jumps.get(0).x - move.startPoint.x) > 1){
+					move = null;
+				}
 			}
-			else if (command.equals("JUMP")){
+			else if (command.equals("JUMP") && selectedPoint != null){
 				ArrayList<Point> jumps = new ArrayList<Point>();
 				
 				int endCommandIndex = line.toUpperCase().indexOf("JUMP") + "JUMP".length();
@@ -259,6 +260,9 @@ public class GameUI {
 		else {
 			return null;
 		}
+		
+		/* This resets which piece is selected each turn */
+		selectedPoint = null;
 		
 		return move;
 	}
