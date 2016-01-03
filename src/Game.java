@@ -42,13 +42,20 @@ public class Game {
 		}
 	}
 	
-	public boolean processMove(Move move){
+	public boolean canMakeMove(Move move){
 		int[][] matrixCopy = board.getMatrixCopy();
-		if (makeMove(move)){
+		boolean result = makeMove(move.getCopy());
+		board.setMatrix(matrixCopy);
+		return result;
+		
+	}
+	
+	public boolean processMove(Move move){
+		if (canMakeMove(move.getCopy())){
+			makeMove(move.getCopy());
 			return true;
 		}
 		else {
-			board.setMatrix(matrixCopy);
 			return false;
 		}
 	}

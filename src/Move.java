@@ -21,6 +21,19 @@ public class Move {
 		return (startPoint != null) && (jumps != null) && (!jumps.isEmpty());
 	}
 	
+	public Move getCopy(){
+		Move move = new Move();
+		
+		move.turnColor = turnColor;
+		move.jumps = new ArrayList<Point>();
+		for (Point p : jumps){
+			move.jumps.add(p);
+		}
+		move.startPoint = startPoint;
+		
+		return move;
+	}
+	
 	public String toString(){
 		return "(Turn: " + turnColor + "), (StartPoint: " + startPoint.toString() + "), (Jumps: " + jumps.toString() + ")";
 	}
