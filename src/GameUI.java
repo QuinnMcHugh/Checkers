@@ -29,6 +29,7 @@ public class GameUI {
 		System.out.println();
 		System.out.println();
 		System.out.println();
+		System.out.println("     0   1   2   3   4   5   6   7");
 		
 		/* Add game commands to output */
 		String[] lines = game.getBoard().toStringLines();

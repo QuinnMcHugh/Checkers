@@ -1,6 +1,7 @@
 /**
  * Created by quinn on 12/30/15.
  */
+
 public class GameController {
 	private Game game;
 	private GameUI ui;
@@ -19,6 +20,7 @@ public class GameController {
 			Move move;
 			do {
 				ui.printGameState();
+				System.out.println("\nRecommended move: " + MiniMax.getBestMove(game, game.getTurn(), 0, 5));
 				move = ui.getPlayerMove(true);
 			} while (move == null || !move.isComplete());
 			

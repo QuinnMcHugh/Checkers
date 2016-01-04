@@ -71,15 +71,15 @@ public class Board {
 		return copy;
 	}
 	
-	public String[] toStringLines(){		
+	public String[] toStringLines(){
 		String[] lines = new String[17];
 		
 		int index = 0;
-		lines[index] = "+-------------------------------+\n";
+		lines[index] = "   +-------------------------------+\n";
 		index++;
 
 		for (int i = 0; i < ROWS; i++){
-			String str = "";
+			String str = " " + Integer.toString(i) + " ";
 			for (int j = 0; j < COLUMNS; j++){
 				str += "| " + getMoniker(matrix[i][j]) + " ";
 			}
@@ -89,13 +89,13 @@ public class Board {
 			index++;
 			
 			if (i != ROWS - 1){
-				str = "|---|---|---|---|---|---|---|---|\n";
+				str = "   |---|---|---|---|---|---|---|---|\n";
 				lines[index] = str;
 				index++;
 			}
 		}
 		
-		lines[16] = "+-------------------------------+\n";
+		lines[16] = "   +-------------------------------+\n";
 
 		return lines;
 	}
